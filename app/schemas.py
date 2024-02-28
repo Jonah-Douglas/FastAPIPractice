@@ -1,5 +1,7 @@
-from pydantic import BaseModel, EmailStr
-from pydantic.types import conint
+from typing_extensions import Annotated
+from pydantic import BaseModel, EmailStr, Field
+# from pydantic.types import conint     
+    # import tied with deprecated conint code below, will probably remove in favor of Annotated
 from datetime import datetime
 from typing import Optional
 
@@ -50,4 +52,5 @@ class TokenData(BaseModel):
 
 class Vote(BaseModel):
     post_id: int
-    dir: conint(le=1)
+    #dir: conint(le=1)      // old code that was recommended, being deprecated to favor Annotated below
+    dir: Annotated[int, Field(le=1)]
